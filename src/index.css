@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+}
+
+:root {
+  --bg: #FAF7F0;             /* Soothing rich cream background */
+  --surface: #F1ECE0;        /* Slightly deeper warm cream for cards */
+  --surface2: #E5DEC9;       /* Soft nested elements background */
+  --accent: #606C38;         /* Premium solid olive green */
+  --accent2: #283618;        /* Rich deep olive green */
+  --green: #4F6D44;          /* Soft sage/nature green */
+  --red: #A8443B;            /* Soft brick/terracotta red */
+  --text: #2C351C;           /* Deep dark olive-charcoal (extremely readable on cream) */
+  --text-muted: #748259;     /* Soft sage/olive muted text */
+  --border: rgba(96, 108, 56, 0.15); /* Translucent olive-infused borders */
+  --card-front: #FFFFFF;     /* Pure sheet-white for cards face */
+  --card-back: #EAE4D3;      /* Creamy back side of cards */
+  --shadow: rgba(40, 54, 24, 0.06); /* Soft organic shadow */
+}
+
+body.light {
+  --bg: #1E2514;             /* Dark forest olive background */
+  --surface: #2D3B1F;        /* Deep pine green surface cards */
+  --surface2: #3A4C27;       /* Nested containers */
+  --accent: #EFEAE0;         /* Soft warm cream accent */
+  --accent2: #D4CBBA;        /* Deeper warm cream */
+  --green: #6B8E23;          /* Light spring olive green */
+  --red: #D95D4E;            /* Terracotta red */
+  --text: #FAF7F2;           /* Brilliant cream text on dark */
+  --text-muted: #99A880;     /* Muted sage-pine text */
+  --border: rgba(255, 255, 255, 0.08); /* Semi-transparent white borders */
+  --card-front: #27331A;     /* Soft dark forest card face */
+  --card-back: #1C2413;      /* Deep dark card back */
+  --shadow: rgba(0, 0, 0, 0.35); /* Heavy dark mode shadows */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Background Glowing Aura Layer */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(96, 108, 56, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 90%, rgba(40, 54, 24, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s;
+}
+
+body.light::before {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(239, 234, 224, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 90%, rgba(153, 168, 128, 0.04) 0%, transparent 60%);
+}
+
+/* Slide elements transitions */
+header, .cat-card, .flip-face, .subcat-card, .tense-card,
+.home-card, .verb-table-card, .tema-status, .tema-input {
+  transition: background-color 0.3s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Custom List table inputs */
+.tema-status.s-vacio  { background-color: rgba(255, 255, 255, 0.04); color: var(--text-muted); }
+.tema-status.s-ok     { background-color: rgba(78, 203, 135, 0.12);  color: #4ecb87; border-color: rgba(78, 203, 135, 0.3); }
+.tema-status.s-reforzar { background-color: rgba(255, 200, 50, 0.12); color: #f4c430; border-color: rgba(255, 200, 50, 0.3); }
+.tema-status.s-estudiar { background-color: rgba(232, 80, 58, 0.12);  color: #e8503a; border-color: rgba(232, 80, 58, 0.3); }
+
+body.light .tema-status.s-ok      { color: #1e9e5e; background-color: rgba(30, 158, 94, 0.1); border-color: rgba(30, 158, 94, 0.25); }
+body.light .tema-status.s-reforzar{ color: #b8720a; background-color: rgba(212, 134, 10, 0.1); border-color: rgba(212, 134, 10, 0.25); }
+body.light .tema-status.s-estudiar{ color: #c0392b; background-color: rgba(192, 57, 43, 0.1); border-color: rgba(192, 57, 43, 0.25); }
+
+/* Animation trigger helper */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cat-card, .subcat-card, .home-card, .tense-card, .flip-card, .write-card {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}

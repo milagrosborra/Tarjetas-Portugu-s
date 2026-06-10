@@ -1,0 +1,6 @@
+{
+  "name": "Português Flash",
+  "description": "Una aplicación premium para aprender portugués utilizando tarjetas dinámicas de vocabulario, tablas interactivas de conjugación de verbos y planificación de temas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
