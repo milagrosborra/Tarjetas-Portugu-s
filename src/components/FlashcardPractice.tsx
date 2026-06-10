@@ -1,9 +1,10 @@
-import { useState, useEffect, MouseEvent } from "react";
+import { useState, useEffect, MouseEvent, ReactNode } from "react";
 import { ArrowLeft, Check, RotateCcw, AlertTriangle, Play, HelpCircle, Eye, Highlighter } from "lucide-react";
 import { Card, CardMode } from "../types";
+import { EmojiIcon } from "./EmojiIcon";
 
 interface FlashcardPracticeProps {
-  title: string;
+  title: ReactNode;
   categoryLabel: string;
   cards: Card[];
   onBack: () => void;
@@ -138,7 +139,9 @@ export function FlashcardPractice({
                   <span className="card-hint text-[9px] uppercase tracking-wider text-[var(--text-muted)] font-bold">
                     Español · click para revelar
                   </span>
-                  <span className="card-emoji-big text-3xl">{card.emoji}</span>
+                  <div className="card-emoji-big my-1 flex items-center justify-center">
+                    <EmojiIcon emoji={card.emoji} size={42} />
+                  </div>
                   <div className="card-word-es font-display text-xl font-bold text-[var(--text)] text-center px-2">
                     {card.es}
                   </div>
@@ -213,7 +216,9 @@ export function FlashcardPractice({
               <div className="write-card-hint text-[9px] uppercase tracking-widest text-[var(--text-muted)] font-bold">
                 Español
               </div>
-              <div className="write-card-emoji text-3xl">{card.emoji}</div>
+              <div className="write-card-emoji my-1 flex items-center justify-center">
+                <EmojiIcon emoji={card.emoji} size={40} />
+              </div>
               <div className="write-card-word font-display text-lg font-bold text-[var(--text)] text-center px-1">
                 {card.es}
               </div>

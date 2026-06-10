@@ -13,6 +13,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import { TemasSection } from "./components/TemasSection";
 import { VerbPractice } from "./components/VerbPractice";
 import { FlashcardPractice } from "./components/FlashcardPractice";
+import { EmojiIcon } from "./components/EmojiIcon";
 
 export default function App() {
   const [screen, setScreen] = useState<ViewScreen>("home");
@@ -179,7 +180,7 @@ export default function App() {
               </h1>
               <p className="hero-sub text-[var(--text-muted)] text-base sm:text-lg font-light mt-3 text-center md:text-left max-w-2xl">
                 Elige uno de los tres módulos interactivos para practicar vocabulario de forma visual,
-                conjuación de verbos en tiempo real u organizar tus temas de estudio prioritarios.
+                conjugación de verbos en tiempo real u organizar tus temas de estudio prioritarios.
               </p>
             </div>
 
@@ -187,47 +188,38 @@ export default function App() {
             <div className="home-grid grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
               <div
                 onClick={() => enterScope("modulo3")}
-                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-start cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
+                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
               >
-                <div className="text-4xl mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
-                  📗
+                <div className="mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
+                  <EmojiIcon emoji="📗" size={32} />
                 </div>
-                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] mb-2 group-hover:text-[var(--accent)] transition-colors">
+                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
                   Módulo 3 Especial
                 </h3>
-                <p className="home-card-desc text-xs line-clamp-3 text-[var(--text-muted)] leading-relaxed">
-                  Superlativos, Fazendo as Malas, viajes en hotel, meteorología y verbos esenciales de gramática de nivel intermedio.
-                </p>
               </div>
 
               <div
                 onClick={() => enterScope("adicional")}
-                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-start cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
+                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
               >
-                <div className="text-4xl mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
-                  📚
+                <div className="mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
+                  <EmojiIcon emoji="📚" size={32} />
                 </div>
-                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] mb-2 group-hover:text-[var(--accent)] transition-colors">
+                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
                   Vocabulario Adicional
                 </h3>
-                <p className="home-card-desc text-xs line-clamp-3 text-[var(--text-muted)] leading-relaxed">
-                  Más de 28 categorías didácticas de vocabulario: comida, familia, colores, preposiciones, adverbios, tecnología y ocio.
-                </p>
               </div>
 
               <div
                 onClick={() => enterScope("verbos")}
-                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-start cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
+                className="home-card bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all relative overflow-hidden group shadow-md"
               >
-                <div className="text-4xl mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
-                  🔵
+                <div className="mb-4 bg-[rgba(244,167,50,0.06)] w-14 h-14 rounded-2xl flex items-center justify-center border border-[rgba(244,167,50,0.1)] group-hover:scale-110 transition-transform">
+                  <EmojiIcon emoji="🔵" size={32} />
                 </div>
-                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] mb-2 group-hover:text-[var(--accent)] transition-colors">
+                <h3 className="home-card-name font-display text-xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
                   Conjugación de Verbos
                 </h3>
-                <p className="home-card-desc text-xs line-clamp-3 text-[var(--text-muted)] leading-relaxed">
-                  Practica los 15 verbos indispensables del portugués en 6 tiempos (Presente, Pretérito Perfeito, Imperfecto, Subjuntivo, etc.).
-                </p>
               </div>
             </div>
 
@@ -256,23 +248,18 @@ export default function App() {
 
             <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {modulo3Categories.map((cat) => {
-                const isVerbType = cat.type === "verbos";
-                const keysCount = isVerbType
-                  ? (cat.verbs || []).length
-                  : (modulo3FlashcardData[cat.id] || []).length;
                 return (
                   <div
                     key={cat.id}
                     onClick={() => selectModulo3Category(cat)}
-                    className="cat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all relative overflow-hidden group shadow-sm"
+                    className="cat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all relative overflow-hidden group shadow-sm flex flex-col items-center justify-center text-center gap-3"
                   >
-                    <span className="cat-emoji text-3xl block mb-3">{cat.emoji}</span>
-                    <h4 className="cat-name font-display text-lg font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors">
+                    <div className="cat-emoji my-1 flex justify-center items-center">
+                      <EmojiIcon emoji={cat.emoji} size={36} />
+                    </div>
+                    <h4 className="cat-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
                       {cat.name}
                     </h4>
-                    <span className="cat-count text-[11px] font-bold text-[var(--text-muted)]">
-                      {isVerbType ? `${keysCount} verbos prácticos` : `${keysCount} tarjetas didácticas`}
-                    </span>
                   </div>
                 );
               })}
@@ -300,20 +287,18 @@ export default function App() {
 
             <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {categories.map((cat) => {
-                const totalCards = (flashcardData[cat.id] || []).length;
                 return (
                   <div
                     key={cat.id}
                     onClick={() => selectAdicionalCategory(cat)}
-                    className="cat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all relative overflow-hidden group shadow-sm"
+                    className="cat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all relative overflow-hidden group shadow-sm flex flex-col items-center justify-center text-center gap-3"
                   >
-                    <span className="cat-emoji text-3xl block mb-3">{cat.emoji}</span>
-                    <h4 className="cat-name font-display text-lg font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors">
+                    <div className="cat-emoji my-1 flex justify-center items-center">
+                      <EmojiIcon emoji={cat.emoji} size={36} />
+                    </div>
+                    <h4 className="cat-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
                       {cat.name}
                     </h4>
-                    <span className="cat-count text-[11px] font-bold text-[var(--text-muted)]">
-                      {totalCards} tarjetas · {cat.subcats?.length || 0} subcategorías
-                    </span>
                   </div>
                 );
               })}
@@ -344,19 +329,14 @@ export default function App() {
                 <div
                   key={tense.id}
                   onClick={() => selectVerbTense(tense)}
-                  className="tense-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all group shadow-sm flex items-start gap-4"
+                  className="tense-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all group shadow-sm flex flex-col items-center justify-center text-center gap-3"
                 >
-                  <span className="tense-emoji text-3xl bg-[rgba(255,255,255,0.03)] p-3 rounded-xl border border-[var(--border)] group-hover:bg-[rgba(244,167,50,0.05)] transition-colors">
-                    {tense.emoji}
-                  </span>
-                  <div>
-                    <h4 className="tense-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
-                      {tense.name}
-                    </h4>
-                    <p className="tense-desc text-[11px] text-[var(--text-muted)] mt-1 font-medium leading-relaxed">
-                      {tense.desc}
-                    </p>
+                  <div className="tense-emoji bg-[rgba(255,255,255,0.03)] p-3 rounded-xl border border-[var(--border)] group-hover:bg-[rgba(244,167,50,0.05)] transition-colors flex items-center justify-center">
+                    <EmojiIcon emoji={tense.emoji} size={36} />
                   </div>
+                  <h4 className="tense-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                    {tense.name}
+                  </h4>
                 </div>
               ))}
             </div>
@@ -373,8 +353,9 @@ export default function App() {
               >
                 ← Volver
               </button>
-              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)]">
-                {currentCategory.emoji} {currentCategory.name}
+              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)] flex items-center gap-3">
+                <EmojiIcon emoji={currentCategory.emoji} size={36} />
+                <span>{currentCategory.name}</span>
               </h2>
             </div>
             <p className="subcat-desc text-[var(--text-muted)] text-sm mb-8 -mt-2">
@@ -383,33 +364,18 @@ export default function App() {
 
             <div className="subcat-grid grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               {(currentCategory.subcats || []).map((sub) => {
-                const isM3 = modulo3Categories.some((c) => c.id === currentCategory!.id);
-                const cardsDb = isM3
-                  ? modulo3FlashcardData[currentCategory!.id] || []
-                  : flashcardData[currentCategory!.id] || [];
-
-                // filtering count
-                const matchedCount = isM3
-                  ? cardsDb.filter(
-                      (c) => (sub.keys || []).includes(c.es) || (sub.keys || []).includes(c.pt)
-                    ).length
-                  : cardsDb.filter((c) => (sub.keys || []).includes(c.es)).length;
-
                 return (
                   <div
                     key={sub.id}
                     onClick={() => selectSubcategoryGate(sub.id)}
-                    className="subcat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-5 cursor-pointer hover:-translate-y-0.5 transition-all flex items-center gap-4 group shadow-sm"
+                    className="subcat-card bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl p-6 cursor-pointer hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-3 group shadow-sm"
                   >
-                    <span className="subcat-emoji text-2xl">{sub.emoji}</span>
-                    <div>
-                      <h4 className="subcat-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
-                        {sub.name}
-                      </h4>
-                      <span className="subcat-count text-[11px] font-bold text-[var(--text-muted)]">
-                        {matchedCount} tarjetas
-                      </span>
+                    <div className="subcat-emoji flex items-center justify-center">
+                      <EmojiIcon emoji={sub.emoji} size={32} />
                     </div>
+                    <h4 className="subcat-name font-display text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                      {sub.name}
+                    </h4>
                   </div>
                 );
               })}
@@ -429,9 +395,17 @@ export default function App() {
         {screen === "flashcards" && currentCategory && (
           <FlashcardPractice
             title={
-              currentSubcat
-                ? `${currentSubcat.emoji} ${currentSubcat.name}`
-                : `Todo ${currentCategory.name}`
+              currentSubcat ? (
+                <span className="flex items-center gap-2">
+                  <EmojiIcon emoji={currentSubcat.emoji} size={32} />
+                  <span>{currentSubcat.name}</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <EmojiIcon emoji={currentCategory.emoji} size={32} />
+                  <span>Todo {currentCategory.name}</span>
+                </span>
+              )
             }
             categoryLabel={
               modulo3Categories.some((c) => c.id === currentCategory.id)
