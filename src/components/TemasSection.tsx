@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, BookOpen } from "lucide-react";
+import { Plus, Trash2, BookOpen, ArrowUp, ArrowDown } from "lucide-react";
 import { Tema } from "../types";
 
 export function TemasSection() {
@@ -39,6 +39,24 @@ export function TemasSection() {
       ...temas,
       { tema: "", pagina: "", seccion: "", estado: "" as const }
     ];
+    saveToLocalStorage(updated);
+  };
+
+  const moveUp = (index: number) => {
+    if (index === 0) return;
+    const updated = [...temas];
+    const temp = updated[index];
+    updated[index] = updated[index - 1];
+    updated[index - 1] = temp;
+    saveToLocalStorage(updated);
+  };
+
+  const moveDown = (index: number) => {
+    if (index === temas.length - 1) return;
+    const updated = [...temas];
+    const temp = updated[index];
+    updated[index] = updated[index + 1];
+    updated[index + 1] = temp;
     saveToLocalStorage(updated);
   };
 
@@ -95,7 +113,9 @@ export function TemasSection() {
               <th className="px-4 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] w-[15%]">
                 Estado
               </th>
-              <th className="px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] w-[5%]"></th>
+              <th className="px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] w-[12%]">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -145,14 +165,32 @@ export function TemasSection() {
                     </select>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-center">
-                  <button
-                    onClick={() => deleteRow(idx)}
-                    className="tema-del-btn text-[var(--text-muted)] hover:text-[var(--red)] hover:bg-[rgba(232,80,58,0.1)] p-1.5 rounded-lg transition-all"
-                    title="Eliminar tema"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                <td className="px-4 py-3">
+                  <div className="flex items-center justify-center gap-1">
+                    <button
+                      onClick={() => moveUp(idx)}
+                      disabled={idx === 0}
+                      className="tema-move-btn text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[rgba(244,167,50,0.08)] p-1.5 rounded-lg transition-all disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
+                      title="Mover arriba"
+                    >
+                      <ArrowUp className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => moveDown(idx)}
+                      disabled={idx === temas.length - 1}
+                      className="tema-move-btn text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[rgba(244,167,50,0.08)] p-1.5 rounded-lg transition-all disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
+                      title="Mover abajo"
+                    >
+                      <ArrowDown className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => deleteRow(idx)}
+                      className="tema-del-btn text-[var(--text-muted)] hover:text-[var(--red)] hover:bg-[rgba(232,80,58,0.08)] p-1.5 rounded-lg transition-all cursor-pointer ml-1"
+                      title="Eliminar tema"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

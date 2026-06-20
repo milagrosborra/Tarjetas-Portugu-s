@@ -6,9 +6,11 @@ import { verbConjugations, futuroM3Verbs, PERSONS } from "../data";
 interface VerbPracticeProps {
   tense: VerbTense | null; // null represents Módulo 3 Futuro verbs
   onBack: () => void;
+  onNextSection?: () => void;
+  nextSectionTitle?: string;
 }
 
-export function VerbPractice({ tense, onBack }: VerbPracticeProps) {
+export function VerbPractice({ tense, onBack, onNextSection, nextSectionTitle }: VerbPracticeProps) {
   const [mode, setMode] = useState<VerbMode>("practice");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isVerified, setIsVerified] = useState(false);
@@ -135,20 +137,45 @@ export function VerbPractice({ tense, onBack }: VerbPracticeProps) {
 
       {/* Score Banner when verified */}
       {isVerified && mode === "practice" && (
-        <div className="verb-score-banner bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 mb-8 flex items-center gap-5 shadow-lg border-[var(--border)]">
-          <div className="verb-score-num text-4xl font-display font-black text-[var(--accent)]">
-            {stats.correct}/{stats.total}
+        <div className="verb-score-banner bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-5 shadow-lg">
+          <div className="flex items-center gap-5">
+            <div className="verb-score-num text-4xl font-display font-black text-[var(--accent)]">
+              {stats.correct}/{stats.total}
+            </div>
+            <div>
+              <div className="font-semibold text-lg text-[var(--text)]">Conjugaciones correctas</div>
+              <p className="verb-score-text text-sm text-[var(--text-muted)]">
+                {stats.correct === stats.total
+                  ? "¡Parabéns! ¡Completaste toda esta lista de forma perfecta! 🇧🇷"
+                  : stats.correct >= stats.total * 0.7
+                  ? "¡Excelente trabajo! Posees un dominio firme. Sigue así."
+                  : "Práctica enfocándote en los campos de color rojo para memorizarlos más rápido."}
+              </p>
+            </div>
           </div>
-          <div>
-            <div className="font-semibold text-lg text-[var(--text)]">Conjugaciones correctas</div>
-            <p className="verb-score-text text-sm text-[var(--text-muted)]">
-              {stats.correct === stats.total
-                ? "¡Parabéns! ¡Completaste toda esta lista de forma perfecta! 🇧🇷"
-                : stats.correct >= stats.total * 0.7
-                ? "¡Excelente trabajo! Posees un dominio firme. Sigue así."
-                : "Práctica enfocándote en los campos de color rojo para memorizarlos más rápido."}
-            </p>
+          {onNextSection && (
+            <button
+              onClick={onNextSection}
+              className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3.5 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap self-stretch md:self-auto justify-center"
+            >
+              <span>Siguiente: {nextSectionTitle} →</span>
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Elegant Next button for study mode */}
+      {mode === "study" && onNextSection && (
+        <div className="study-next-banner bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-4 mb-8 flex items-center justify-between gap-4 shadow-sm">
+          <div className="text-sm text-[var(--text-muted)]">
+            Estás en modo de estudio. ¿Quieres pasar al siguiente tema/módulo?
           </div>
+          <button
+            onClick={onNextSection}
+            className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-xs py-2.5 px-5 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer whitespace-nowrap"
+          >
+            <span>Siguiente: {nextSectionTitle} →</span>
+          </button>
         </div>
       )}
 

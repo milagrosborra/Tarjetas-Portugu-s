@@ -9,6 +9,8 @@ interface FlashcardPracticeProps {
   cards: Card[];
   onBack: () => void;
   onFinishCourse: () => void;
+  onNextSection?: () => void;
+  nextSectionTitle?: string;
 }
 
 export function FlashcardPractice({
@@ -16,7 +18,9 @@ export function FlashcardPractice({
   categoryLabel,
   cards,
   onBack,
-  onFinishCourse
+  onFinishCourse,
+  onNextSection,
+  nextSectionTitle
 }: FlashcardPracticeProps) {
   const [activeCards, setActiveCards] = useState<Card[]>([]);
   const [mode, setMode] = useState<CardMode>("ver");
@@ -335,7 +339,7 @@ export function FlashcardPractice({
       {/* BOTTOM CONTROL ACTIONS */}
 
       {/* Review CTA for failed cards inside "Ver" mode */}
-      {mode === "ver" && wrongCount > 0 && (
+      {mode === "ver" && wrongCount > 0 && markedCount < totalCount && (
         <div className="review-btn-wrap mt-10 flex justify-center">
           <button
             onClick={triggerReviewRound}
@@ -347,43 +351,87 @@ export function FlashcardPractice({
         </div>
       )}
 
-      {/* If fully completed VER mode without errors */}
-      {mode === "ver" && markedCount === totalCount && wrongCount === 0 && (
-        <div className="review-btn-wrap mt-10 flex flex-col items-center gap-4">
-          <div className="text-[var(--green)] font-semibold flex items-center gap-2">
-            <Check className="w-5 h-5" />
-            <span>¡Recordabas todas las tarjetas de esta ronda!</span>
+      {/* If fully completed VER mode */}
+      {mode === "ver" && markedCount === totalCount && (
+        <div className="review-btn-wrap mt-10 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl flex flex-col items-center gap-4 text-center max-w-xl mx-auto shadow-sm">
+          {wrongCount === 0 ? (
+            <div className="text-[var(--green)] font-bold flex items-center gap-2">
+              <Check className="w-5 h-5" />
+              <span>¡Recordabas todas las tarjetas de esta ronda!</span>
+            </div>
+          ) : (
+            <div className="text-[var(--accent)] font-semibold">
+              Completaste la ronda, pero marcaste {wrongCount} con error. Puedes repasarlas o continuar.
+            </div>
+          )}
+          <div className="flex gap-4 flex-wrap justify-center mt-2">
+            {wrongCount > 0 && (
+              <button
+                onClick={triggerReviewRound}
+                className="bg-[rgba(232,80,58,0.1)] text-[var(--red)] border border-transparent hover:border-[var(--red)] font-semibold text-sm py-3 px-6 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <span>Repasar errores ({wrongCount})</span>
+              </button>
+            )}
+            <button
+              onClick={onFinishCourse}
+              className="bg-transparent border border-[var(--border)] text-[var(--text)] hover:border-[var(--text)] font-semibold text-sm py-3 px-6 rounded-xl transition-all cursor-pointer"
+            >
+              Volver al menú
+            </button>
+            {onNextSection && (
+              <button
+                onClick={onNextSection}
+                className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer"
+              >
+                Siguiente: {nextSectionTitle} →
+              </button>
+            )}
           </div>
-          <button
-            onClick={onFinishCourse}
-            className="review-btn bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-lg py-4 px-10 rounded-2xl shadow-lg hover:scale-105 transform transition-all cursor-pointer"
-          >
-            Continuar →
-          </button>
         </div>
       )}
 
       {/* Write answers checker buttons */}
       {mode === "escribir" && (
-        <div className="write-check-wrap flex items-center gap-4 mt-8 flex-wrap" id="write-controllers">
-          <button
-            onClick={checkWriteAnswers}
-            className="write-check-btn bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black tracking-wide py-3.5 px-8 rounded-xl hover:shadow-lg transition-all cursor-pointer text-sm"
-          >
-            ✓ Corregir respuestas
-          </button>
-          <button
-            onClick={resetWriteAnswers}
-            className="write-reset-btn text-[var(--text-muted)] hover:text-[var(--text)] bg-transparent border border-[var(--border)] hover:border-[var(--text)] py-3.5 px-6 rounded-xl transition-all cursor-pointer text-sm font-semibold flex items-center gap-1.5"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>Reiniciar</span>
-          </button>
+        <div className="write-check-wrap flex flex-col gap-6 mt-8" id="write-controllers">
+          <div className="flex items-center gap-4 flex-wrap">
+            <button
+              onClick={checkWriteAnswers}
+              className="write-check-btn bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black tracking-wide py-3.5 px-8 rounded-xl hover:shadow-lg transition-all cursor-pointer text-sm"
+            >
+              ✓ Corregir respuestas
+            </button>
+            <button
+              onClick={resetWriteAnswers}
+              className="write-reset-btn text-[var(--text-muted)] hover:text-[var(--text)] bg-transparent border border-[var(--border)] hover:border-[var(--text)] py-3.5 px-6 rounded-xl transition-all cursor-pointer text-sm font-semibold flex items-center gap-1.5"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Reiniciar</span>
+            </button>
+          </div>
 
           {isWriteVerified && writeScore && (
-            <div className="write-score bg-[var(--surface)] text-[var(--accent)] border border-[var(--border)] py-3 px-5 rounded-xl font-display font-bold text-sm">
-              Corrección: {writeScore.correct} / {writeScore.total} aciertos (
-              {Math.round((writeScore.correct / writeScore.total) * 100)}%)
+            <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-[rgba(244,167,50,0.06)] border border-[rgba(244,167,50,0.15)] rounded-2xl shadow-sm">
+              <div className="write-score text-[var(--accent)] font-display font-black text-base">
+                Resultados: {writeScore.correct} / {writeScore.total} aciertos (
+                {Math.round((writeScore.correct / writeScore.total) * 100)}%)
+              </div>
+              <div className="flex gap-3 flex-wrap">
+                <button
+                  onClick={onFinishCourse}
+                  className="bg-transparent border border-[var(--border)] text-[var(--text)] hover:border-[var(--text)] text-sm font-bold py-2.5 px-5 rounded-xl transition-all cursor-pointer"
+                >
+                  Volver al menú
+                </button>
+                {onNextSection && (
+                  <button
+                    onClick={onNextSection}
+                    className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-2.5 px-5 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer"
+                  >
+                    Siguiente: {nextSectionTitle} →
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>

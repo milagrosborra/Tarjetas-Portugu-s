@@ -39,11 +39,89 @@ export default function App() {
     }
   };
 
+  // Find next section info to pass to practice components
+  let nextSectionTitle = "";
+  let onNextSection: (() => void) | undefined = undefined;
+
+  if (screen === "flashcards" && currentCategory) {
+    const isM3 = modulo3Categories.some((c) => c.id === currentCategory.id);
+    if (isM3) {
+      const idx = modulo3Categories.findIndex((c) => c.id === currentCategory.id);
+      if (idx !== -1 && idx < modulo3Categories.length - 1) {
+        const nextCat = modulo3Categories[idx + 1];
+        nextSectionTitle = nextCat.name;
+        onNextSection = () => {
+          if (nextCat.type === "verbos") {
+            setCurrentTense(null);
+            setScreen("verb-practice");
+            setBreadcrumb("Módulo 3 › Futuro do Presente");
+          } else {
+            selectModulo3Category(nextCat);
+          }
+        };
+      } else {
+        // Last of Modulo 3, go to first of Vocabulario Adicional
+        const nextCat = categories[0];
+        nextSectionTitle = `Adicional › ${nextCat.name}`;
+        onNextSection = () => {
+          selectAdicionalCategory(nextCat);
+        };
+      }
+    } else {
+      const idx = categories.findIndex((c) => c.id === currentCategory.id);
+      if (idx !== -1 && idx < categories.length - 1) {
+        const nextCat = categories[idx + 1];
+        nextSectionTitle = nextCat.name;
+        onNextSection = () => {
+          selectAdicionalCategory(nextCat);
+        };
+      } else {
+        // Last of Vocabulario Adicional, go to first Tense of Conjugación de Verbos
+        const nextTense = verbTenses[0];
+        nextSectionTitle = `Verbos › ${nextTense.name}`;
+        onNextSection = () => {
+          selectVerbTense(nextTense);
+        };
+      }
+    }
+  } else if (screen === "verb-practice") {
+    if (currentTense === null) {
+      // Futuro do Presente (Módulo 3 special verbs)
+      const nextCat = modulo3Categories.find((c) => c.id === "no_hotel");
+      if (nextCat) {
+        nextSectionTitle = nextCat.name;
+        onNextSection = () => {
+          selectModulo3Category(nextCat);
+        };
+      }
+    } else {
+      // Conjugación de Verbos
+      const idx = verbTenses.findIndex((t) => t.id === currentTense.id);
+      if (idx !== -1 && idx < verbTenses.length - 1) {
+        const nextTense = verbTenses[idx + 1];
+        nextSectionTitle = nextTense.name;
+        onNextSection = () => {
+          selectVerbTense(nextTense);
+        };
+      } else {
+        // Last of Conjugación, loop back to Módulo 3 first category
+        const nextCat = modulo3Categories[0];
+        nextSectionTitle = `Módulo 3 › ${nextCat.name}`;
+        onNextSection = () => {
+          selectModulo3Category(nextCat);
+        };
+      }
+    }
+  }
+
   // CATEGORY HANDLING: ADICIONAL
   const selectAdicionalCategory = (cat: Category) => {
     setCurrentCategory(cat);
-    setScreen("subcategories");
-    setBreadcrumb(`Adicional › ${cat.name}`);
+    const allCards = flashcardData[cat.id] || [];
+    setCurrentSubcat(null);
+    setCurrentCards(allCards.map((c, i) => ({ ...c, id: i })));
+    setBreadcrumb(`Adicional › ${cat.name} › Todas`);
+    setScreen("flashcards");
   };
 
   const selectAdicionalSubcat = (subcatId: string) => {
@@ -73,8 +151,11 @@ export default function App() {
       setBreadcrumb("Módulo 3 › Futuro do Presente");
     } else {
       setCurrentCategory(cat);
-      setScreen("subcategories");
-      setBreadcrumb(`Módulo 3 › ${cat.name}`);
+      const allCards = modulo3FlashcardData[cat.id] || [];
+      setCurrentSubcat(null);
+      setCurrentCards(allCards.map((c, i) => ({ ...c, id: i })));
+      setBreadcrumb(`Módulo 3 › ${cat.name} › Todas`);
+      setScreen("flashcards");
     }
   };
 
@@ -137,8 +218,20 @@ export default function App() {
       }
       setCurrentCategory(null);
     } else if (screen === "flashcards") {
-      setScreen("subcategories");
-      setBreadcrumb(currentCategory ? `Volver a ${currentCategory.name}` : "Estudio");
+      if (!currentCategory) {
+        setScreen("home");
+        setBreadcrumb("Selecciona un módulo");
+        return;
+      }
+      const isM3 = modulo3Categories.some((c) => c.id === currentCategory.id);
+      if (isM3) {
+        setScreen("modulo3");
+        setBreadcrumb("Módulo 3");
+      } else {
+        setScreen("categories");
+        setBreadcrumb("Adicional");
+      }
+      setCurrentCategory(null);
     } else if (screen === "verb-practice") {
       if (currentTense === null) {
         setScreen("modulo3");
@@ -238,8 +331,9 @@ export default function App() {
               >
                 ← Volver
               </button>
-              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)]">
-                📗 Módulo 3 Especial
+              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)] flex items-center gap-3">
+                <EmojiIcon emoji="📗" size={36} />
+                <span>Módulo 3 Especial</span>
               </h2>
             </div>
             <p className="subcat-desc text-[var(--text-muted)] text-sm mb-8">
@@ -277,8 +371,9 @@ export default function App() {
               >
                 ← Volver
               </button>
-              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)]">
-                📚 Vocabulario Adicional (28 Categorías)
+              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)] flex items-center gap-3">
+                <EmojiIcon emoji="📚" size={36} />
+                <span>Vocabulario Adicional (28 Categorías)</span>
               </h2>
             </div>
             <p className="subcat-desc text-[var(--text-muted)] text-sm mb-8">
@@ -316,8 +411,9 @@ export default function App() {
               >
                 ← Volver
               </button>
-              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)]">
-                🔵 Tiempos Verbales
+              <h2 className="subcat-cat-title font-display text-3xl font-black text-[var(--text)] flex items-center gap-3">
+                <EmojiIcon emoji="🔵" size={36} />
+                <span>Tiempos Verbales</span>
               </h2>
             </div>
             <p className="subcat-desc text-[var(--text-muted)] text-sm mb-8 -mt-4">
@@ -415,12 +511,19 @@ export default function App() {
             cards={currentCards}
             onBack={navigateBack}
             onFinishCourse={() => setScreen("congrats")}
+            onNextSection={onNextSection}
+            nextSectionTitle={nextSectionTitle}
           />
         )}
 
         {/* SCREEN: ACTIVE CONJUGATION STUDY LAB */}
         {screen === "verb-practice" && (
-          <VerbPractice tense={currentTense} onBack={navigateBack} />
+          <VerbPractice
+            tense={currentTense}
+            onBack={navigateBack}
+            onNextSection={onNextSection}
+            nextSectionTitle={nextSectionTitle}
+          />
         )}
 
         {/* SCREEN: CONGRATULATIONS AND SUCCESS FLAG */}
