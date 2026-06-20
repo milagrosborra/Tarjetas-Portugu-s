@@ -135,6 +135,22 @@ export function VerbPractice({ tense, onBack, onNextSection, nextSectionTitle }:
         </div>
       </div>
 
+      {/* Special Characters Copy Helper */}
+      <div className="special-chars-bar bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <span className="text-xl">⌨️</span>
+          <div>
+            <h4 className="font-bold text-sm text-[var(--text)]">Caracteres Especiales de Portugués</h4>
+            <p className="text-xs text-[var(--text-muted)]">Toca cualquier letra para copiarla al portapapeles y pegarla en las conjugaciones</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          {["ã", "ê", "ç", "Ã", "Ê", "Ç"].map((char) => (
+            <SpecialCharButton key={char} char={char} />
+          ))}
+        </div>
+      </div>
+
       {/* Score Banner when verified */}
       {isVerified && mode === "practice" && (
         <div className="verb-score-banner bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-5 shadow-lg">
@@ -244,6 +260,44 @@ export function VerbPractice({ tense, onBack, onNextSection, nextSectionTitle }:
             <span>Siguiente: {nextSectionTitle} →</span>
           </button>
         </div>
+      )}
+    </div>
+  );
+}
+
+function SpecialCharButton({ char }: { char: string; key?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(char).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }).catch(() => {
+      // fallback
+      const el = document.createElement("textarea");
+      el.value = char;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
+  return (
+    <div className="relative">
+      <button
+        onClick={handleCopy}
+        className="w-10 h-10 flex items-center justify-center rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[var(--accent)] border border-[var(--border)] hover:border-transparent text-[var(--text)] hover:text-[#0f0e17] text-base font-bold font-mono transition-all transform active:scale-95 cursor-pointer shadow-sm hover:shadow"
+        title={`Copiar ${char}`}
+      >
+        {char}
+      </button>
+      {copied && (
+        <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-[var(--green)] text-[#0f0e17] text-[10px] font-bold py-1 px-2 rounded shadow-md whitespace-nowrap animate-bounce z-10">
+          ¡Copiado!
+        </span>
       )}
     </div>
   );

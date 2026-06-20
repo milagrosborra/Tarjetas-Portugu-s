@@ -668,7 +668,7 @@ export const modulo3Categories: Category[] = [
   ]},
   { id: 'foto3_restaurante', emoji: '🍷', name: 'Vocabulário: Restaurante', subcats: [
     { id: 'f3_comida_serv', emoji: '🍽️', name: 'Comida e serviço', keys: [
-      'Couvert', 'Tira-gosto', 'Os petiscos', 'O aperitivo', 'A entrada', 'A sobremesa', 'A conta', 'A gorjeta', 'O C.C.'
+      'Couvert', 'O aperitivo / Os petiscos / Tira-gosto', 'A entrada', 'A sobremesa', 'A conta', 'A gorjeta', 'O C.C.'
     ] },
     { id: 'f3_atend', emoji: '🤵', name: 'Atendimento', keys: [
       'O garçom', 'A garçonete', 'O cardápio', 'A lista de vinhos'
@@ -870,9 +870,7 @@ export const modulo3FlashcardData: Record<string, { es: string; pt: string; emoj
   ],
   foto3_restaurante: [
     { es: 'Servicio de mesa / bocadillo de bienvenida', pt: 'Couvert', emoji: '🍞' },
-    { es: 'Bocadillo / Aperitivo', pt: 'Tira-gosto', emoji: '🍤' },
-    { es: 'Bocaditos / Tapas', pt: 'Os petiscos', emoji: '🍟' },
-    { es: 'El aperitivo', pt: 'O aperitivo', emoji: '🍹' },
+    { es: 'Aperitivo', pt: 'O aperitivo / Os petiscos / Tira-gosto', emoji: '🍹' },
     { es: 'La entrada', pt: 'A entrada', emoji: '🥗' },
     { es: 'El postre', pt: 'A sobremesa', emoji: '🍰' },
     { es: 'La cuenta', pt: 'A conta', emoji: '📝' },
