@@ -153,29 +153,6 @@ export function VerbPractice({ tense, onBack, onNextSection, nextSectionTitle }:
               </p>
             </div>
           </div>
-          {onNextSection && (
-            <button
-              onClick={onNextSection}
-              className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3.5 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap self-stretch md:self-auto justify-center"
-            >
-              <span>Siguiente: {nextSectionTitle} →</span>
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Elegant Next button for study mode */}
-      {mode === "study" && onNextSection && (
-        <div className="study-next-banner bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-4 mb-8 flex items-center justify-between gap-4 shadow-sm">
-          <div className="text-sm text-[var(--text-muted)]">
-            Estás en modo de estudio. ¿Quieres pasar al siguiente tema/módulo?
-          </div>
-          <button
-            onClick={onNextSection}
-            className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-xs py-2.5 px-5 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer whitespace-nowrap"
-          >
-            <span>Siguiente: {nextSectionTitle} →</span>
-          </button>
         </div>
       )}
 
@@ -256,6 +233,18 @@ export function VerbPractice({ tense, onBack, onNextSection, nextSectionTitle }:
           );
         })}
       </div>
+
+      {/* Persistent Next Module Button at the Bottom Right */}
+      {onNextSection && (
+        <div className="flex justify-end mt-12 pt-6 border-t border-[var(--border)]">
+          <button
+            onClick={onNextSection}
+            className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5"
+          >
+            <span>Siguiente: {nextSectionTitle} →</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

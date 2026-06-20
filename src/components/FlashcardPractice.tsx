@@ -379,14 +379,6 @@ export function FlashcardPractice({
             >
               Volver al menú
             </button>
-            {onNextSection && (
-              <button
-                onClick={onNextSection}
-                className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer"
-              >
-                Siguiente: {nextSectionTitle} →
-              </button>
-            )}
           </div>
         </div>
       )}
@@ -423,17 +415,21 @@ export function FlashcardPractice({
                 >
                   Volver al menú
                 </button>
-                {onNextSection && (
-                  <button
-                    onClick={onNextSection}
-                    className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-2.5 px-5 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer"
-                  >
-                    Siguiente: {nextSectionTitle} →
-                  </button>
-                )}
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Persistent Next Module Button at the Bottom Right */}
+      {onNextSection && (
+        <div className="flex justify-end mt-12 pt-6 border-t border-[var(--border)]">
+          <button
+            onClick={onNextSection}
+            className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5"
+          >
+            Siguiente: {nextSectionTitle} →
+          </button>
         </div>
       )}
     </div>
