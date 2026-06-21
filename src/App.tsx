@@ -12,6 +12,7 @@ import { categories, modulo3Categories, verbTenses, flashcardData, modulo3Flashc
 import { ThemeToggle } from "./components/ThemeToggle";
 import { TemasSection } from "./components/TemasSection";
 import { VerbPractice } from "./components/VerbPractice";
+import { SubjuntivoPractice } from "./components/SubjuntivoPractice";
 import { FlashcardPractice } from "./components/FlashcardPractice";
 import { EmojiIcon } from "./components/EmojiIcon";
 
@@ -98,6 +99,9 @@ export default function App() {
             setCurrentTense(null);
             setScreen("verb-practice");
             setBreadcrumb("Módulo 3 › Futuro do Presente");
+          } else if (nextCat.type === "subjuntivo_verbos") {
+            setScreen("subjuntivo-practice");
+            setBreadcrumb("Módulo 3 › Presente do Subjuntivo");
           } else {
             selectModulo3Category(nextCat);
           }
@@ -129,12 +133,13 @@ export default function App() {
     }
   } else if (screen === "verb-practice") {
     if (currentTense === null) {
-      // Futuro do Presente (Módulo 3 special verbs)
-      const nextCat = modulo3Categories.find((c) => c.id === "no_hotel");
-      if (nextCat) {
-        nextSectionTitle = nextCat.name;
+      // Futuro do Presente (Módulo 3 special verbs) -> Go to Presente do Subjuntivo
+      const subjCat = modulo3Categories.find((c) => c.id === "subjuntivo_m3");
+      if (subjCat) {
+        nextSectionTitle = subjCat.name;
         onNextSection = () => {
-          selectModulo3Category(nextCat);
+          setScreen("subjuntivo-practice");
+          setBreadcrumb("Módulo 3 › Presente do Subjuntivo");
         };
       }
     } else {
@@ -154,6 +159,14 @@ export default function App() {
           selectModulo3Category(nextCat);
         };
       }
+    }
+  } else if (screen === "subjuntivo-practice") {
+    const nextCat = modulo3Categories.find((c) => c.id === "no_hotel");
+    if (nextCat) {
+      nextSectionTitle = nextCat.name;
+      onNextSection = () => {
+        selectModulo3Category(nextCat);
+      };
     }
   }
 
@@ -192,6 +205,9 @@ export default function App() {
       setCurrentTense(null); // special tag for Futuro do Presente (Modulo 3)
       setScreen("verb-practice");
       setBreadcrumb("Módulo 3 › Futuro do Presente");
+    } else if (cat.type === "subjuntivo_verbos") {
+      setScreen("subjuntivo-practice");
+      setBreadcrumb("Módulo 3 › Presente do Subjuntivo");
     } else {
       setCurrentCategory(cat);
       const allCards = modulo3FlashcardData[cat.id] || [];
@@ -283,6 +299,9 @@ export default function App() {
         setScreen("verb-tenses");
         setBreadcrumb("Verbos");
       }
+    } else if (screen === "subjuntivo-practice") {
+      setScreen("modulo3");
+      setBreadcrumb("Módulo 3");
     } else if (screen === "congrats") {
       setScreen("home");
       setBreadcrumb("Selecciona un módulo");
@@ -640,6 +659,15 @@ export default function App() {
         {screen === "verb-practice" && (
           <VerbPractice
             tense={currentTense}
+            onBack={navigateBack}
+            onNextSection={onNextSection}
+            nextSectionTitle={nextSectionTitle}
+          />
+        )}
+
+        {/* SCREEN: ACTIVE SUBJUNTIVO STUDY LAB */}
+        {screen === "subjuntivo-practice" && (
+          <SubjuntivoPractice
             onBack={navigateBack}
             onNextSection={onNextSection}
             nextSectionTitle={nextSectionTitle}

@@ -43,6 +43,7 @@ export type ViewScreen =
   | "flashcards"
   | "verb-tenses"
   | "verb-practice"
+  | "subjuntivo-practice"
   | "congrats"
   | "repaso";
 

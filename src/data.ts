@@ -622,6 +622,7 @@ export const modulo3Categories: Category[] = [
     { id: 'higiene', emoji: '🧴', name: 'Higiene e beleza', keys: ['Pasta de dientes', 'Cepillo de dientes', 'Colonia', 'Perfume', 'Desodorante', 'Shampoo', 'Acondicionador', 'Jabón', 'Toalla'] }
   ]},
   { id: 'futuro_m3', emoji: '🔮', name: 'Futuro', type: 'verbos', verbs: ['Estudar', 'Entender', 'Dividir', 'Dizer', 'Fazer', 'Trazer'] },
+  { id: 'subjuntivo_m3', emoji: '🤔', name: 'Presente do Subjuntivo', type: 'subjuntivo_verbos' },
   { id: 'no_hotel', emoji: '🏨', name: 'No Hotel', subcats: [
     { id: 'hotel_personal', emoji: '👔', name: 'Personal y habitaciones', keys: ['Gerente', 'Recepcionista', 'Camareira', 'Porteiro', 'Reserva', 'Diária', 'Estadia', 'Suíte'] },
     { id: 'hotel_amenidades', emoji: '🛏️', name: 'Camas, ropa y amenities', keys: ['Lençol', 'Cobertor', 'Travesseiro', 'Fronha', 'Piscina', 'Garagem'] }
