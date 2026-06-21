@@ -25,6 +25,49 @@ export default function App() {
   const [currentCards, setCurrentCards] = useState<Card[]>([]);
   const [currentTense, setCurrentTense] = useState<VerbTense | null>(null);
 
+  // Session-persisted incorrect cards queue
+  const [incorrectCards, setIncorrectCards] = useState<Card[]>(() => {
+    try {
+      const saved = localStorage.getItem("ptflash_incorrect_cards");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const saveIncorrectCards = (cardsList: Card[]) => {
+    setIncorrectCards(cardsList);
+    try {
+      localStorage.setItem("ptflash_incorrect_cards", JSON.stringify(cardsList));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleCollectIncorrectCards = (failedCards: Card[]) => {
+    let merged: Card[] = [];
+    setIncorrectCards((prev) => {
+      const existingKey = new Set(prev.map((c) => c.pt.toLowerCase() + "::" + c.es.toLowerCase()));
+      const uniqueNew = failedCards.filter(
+        (c) => !existingKey.has(c.pt.toLowerCase() + "::" + c.es.toLowerCase())
+      );
+      merged = [...prev, ...uniqueNew];
+      try {
+        localStorage.setItem("ptflash_incorrect_cards", JSON.stringify(merged));
+      } catch (err) {
+        console.error(err);
+      }
+      return merged;
+    });
+    setScreen("repaso");
+    setBreadcrumb("Repaso de Tarjetas Incorrectas");
+  };
+
+  const handleRepasoCorrectAnswers = (correctIds: number[]) => {
+    const updated = incorrectCards.filter((card) => !correctIds.includes(card.id));
+    saveIncorrectCards(updated);
+  };
+
   // Transition screen picker
   const enterScope = (target: "modulo3" | "adicional" | "verbos") => {
     if (target === "modulo3") {
@@ -203,7 +246,7 @@ export default function App() {
 
   // BACK NAVIGATION
   const navigateBack = () => {
-    if (screen === "modulo3" || screen === "categories" || screen === "verb-tenses") {
+    if (screen === "repaso" || screen === "modulo3" || screen === "categories" || screen === "verb-tenses") {
       setScreen("home");
       setBreadcrumb("Selecciona un módulo");
     } else if (screen === "subcategories") {
@@ -318,6 +361,65 @@ export default function App() {
 
             {/* Persistent Study Planner */}
             <TemasSection />
+
+            {/* SECCIÓN REPASO */}
+            <div className="repaso-section mt-12 pt-10 border-t border-[var(--border)]" id="repaso-section">
+              <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 bg-gradient-to-r from-[rgba(244,167,50,0.05)] to-[rgba(232,103,58,0.03)] border border-[rgba(244,167,50,0.15)] rounded-3xl p-6 sm:p-8 shadow-sm">
+                <div className="flex-grow">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xl">🔮</span>
+                    <h3 className="text-xl font-display font-black text-[var(--accent)]">
+                      Sección de Repaso Personal
+                    </h3>
+                  </div>
+                  <p className="text-sm text-[var(--text-muted)] max-w-2xl leading-relaxed">
+                    Aquí se recopilan automáticamente las tarjetas que marcas con error o escribes incorrectamente. Practica y depura esta sección hasta vaciarla. ¡Las respuestas correctas se eliminan progresivamente de la lista!
+                  </p>
+                  <div className="mt-4 flex items-center gap-3">
+                    <span className="text-xs font-mono font-bold bg-[rgba(244,167,50,0.1)] text-[var(--accent)] px-3 py-1.5 rounded-full border border-[rgba(244,167,50,0.15)]">
+                      {incorrectCards.length > 0 ? (
+                        <span>Quedan {incorrectCards.length} tarjetas por repasar</span>
+                      ) : (
+                        <span>¡Al día! Quedan 0 tarjetas por repasar 🎉</span>
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3 items-center shrink-0">
+                  {incorrectCards.length > 0 ? (
+                    <>
+                      <button
+                        onClick={() => {
+                          setScreen("repaso");
+                          setBreadcrumb("Repaso de Tarjetas Incorrectas");
+                        }}
+                        className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl hover:scale-105 transform transition-all cursor-pointer shadow-md flex items-center gap-1.5"
+                      >
+                        <span>Comenzar Repaso 🚀</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm("¿Estás seguro de que deseas limpiar todo tu historial de tarjetas incorrectas?")) {
+                            saveIncorrectCards([]);
+                          }
+                        }}
+                        className="bg-transparent border border-[var(--border)] hover:border-[var(--red)] hover:text-[var(--red)] text-[var(--text-muted)] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer"
+                      >
+                        <span>Limpiar historial</span>
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      disabled
+                      className="bg-transparent border border-[var(--border)] text-[var(--text-muted)] text-sm py-3 px-6 rounded-xl cursor-not-allowed opacity-60 flex items-center gap-1.5"
+                    >
+                      <span>No hay tarjetas pendientes</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -513,6 +615,24 @@ export default function App() {
             onFinishCourse={() => setScreen("congrats")}
             onNextSection={onNextSection}
             nextSectionTitle={nextSectionTitle}
+            onCollectIncorrectCards={handleCollectIncorrectCards}
+          />
+        )}
+
+        {/* SCREEN: REPASO EXCLUSIVO DE TARJETAS INCORRECTAS */}
+        {screen === "repaso" && (
+          <FlashcardPractice
+            title={
+              <span className="flex items-center gap-2">
+                <span>🔮 Sección de Repaso</span>
+              </span>
+            }
+            categoryLabel="Repaso Personal de Errores"
+            cards={incorrectCards}
+            onBack={navigateBack}
+            onFinishCourse={() => setScreen("home")}
+            isRepasoMode={true}
+            onRepasoCorrectAnswers={handleRepasoCorrectAnswers}
           />
         )}
 

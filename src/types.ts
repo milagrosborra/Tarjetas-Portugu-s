@@ -43,7 +43,8 @@ export type ViewScreen =
   | "flashcards"
   | "verb-tenses"
   | "verb-practice"
-  | "congrats";
+  | "congrats"
+  | "repaso";
 
 export type CardMode = "ver" | "escribir";
 export type VerbMode = "study" | "practice";

@@ -11,6 +11,9 @@ interface FlashcardPracticeProps {
   onFinishCourse: () => void;
   onNextSection?: () => void;
   nextSectionTitle?: string;
+  onCollectIncorrectCards?: (failedCards: Card[]) => void;
+  isRepasoMode?: boolean;
+  onRepasoCorrectAnswers?: (correctIds: number[]) => void;
 }
 
 export function FlashcardPractice({
@@ -20,7 +23,10 @@ export function FlashcardPractice({
   onBack,
   onFinishCourse,
   onNextSection,
-  nextSectionTitle
+  nextSectionTitle,
+  onCollectIncorrectCards,
+  isRepasoMode = false,
+  onRepasoCorrectAnswers
 }: FlashcardPracticeProps) {
   const [activeCards, setActiveCards] = useState<Card[]>([]);
   const [mode, setMode] = useState<CardMode>("ver");
@@ -32,15 +38,21 @@ export function FlashcardPractice({
   const [writeScore, setWriteScore] = useState<{ correct: number; total: number } | null>(null);
   const [isWriteVerified, setIsWriteVerified] = useState(false);
 
+  const [currentHeader, setCurrentHeader] = useState<string>("");
+
   useEffect(() => {
-    // Reset cards and all temporary practice status on start
-    setActiveCards([...cards]);
-    setFlipped({});
-    setVotes({});
-    setWrittenAnswers({});
-    setIsWriteVerified(false);
-    setWriteScore(null);
-  }, [cards]);
+    // Reset only if we changed categories / sections
+    const headerStr = String(categoryLabel) + "::" + (title ? "has-title" : "no-title") + "::repaso:" + isRepasoMode;
+    if (currentHeader !== headerStr) {
+      setCurrentHeader(headerStr);
+      setActiveCards([...cards]);
+      setFlipped({});
+      setVotes({});
+      setWrittenAnswers({});
+      setIsWriteVerified(false);
+      setWriteScore(null);
+    }
+  }, [cards, categoryLabel, title, currentHeader, isRepasoMode]);
 
   // Flip toggle
   const toggleFlip = (cardId: number) => {
@@ -104,6 +116,19 @@ export function FlashcardPractice({
       setVotes({});
     } else {
       onFinishCourse();
+    }
+  };
+
+  const getIncorrectCards = (): Card[] => {
+    if (mode === "ver") {
+      return activeCards.filter((c) => votes[c.id] === "cross");
+    } else {
+      return activeCards.filter((c) => {
+        const userVal = normalizeText(writtenAnswers[c.id] || "");
+        const answerVal = normalizeText(c.pt);
+        const answerRaw = c.pt.trim().toLowerCase();
+        return userVal !== answerVal && userVal !== answerRaw;
+      });
     }
   };
 
@@ -357,21 +382,67 @@ export function FlashcardPractice({
           {wrongCount === 0 ? (
             <div className="text-[var(--green)] font-bold flex items-center gap-2">
               <Check className="w-5 h-5" />
-              <span>¡Recordabas todas las tarjetas de esta ronda!</span>
+              <span>{isRepasoMode ? "¡Completaste el repaso de esta ronda con éxito!" : "¡Recordabas todas las tarjetas de esta ronda!"}</span>
             </div>
           ) : (
             <div className="text-[var(--accent)] font-semibold">
-              Completaste la ronda, pero marcaste {wrongCount} con error. Puedes repasarlas o continuar.
+              {isRepasoMode ? (
+                <span>Quedan {wrongCount} tarjetas con error en tu repaso.</span>
+              ) : (
+                <span>Completaste la ronda, pero marcaste {wrongCount} con error. Puedes repasarlas o continuar.</span>
+              )}
             </div>
           )}
           <div className="flex gap-4 flex-wrap justify-center mt-2">
-            {wrongCount > 0 && (
+            {isRepasoMode && wrongCount > 0 ? (
               <button
-                onClick={triggerReviewRound}
-                className="bg-[rgba(232,80,58,0.1)] text-[var(--red)] border border-transparent hover:border-[var(--red)] font-semibold text-sm py-3 px-6 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                onClick={() => {
+                  const failed = getIncorrectCards();
+                  if (onRepasoCorrectAnswers) {
+                    const correctIds = activeCards
+                      .filter((c) => !failed.some((f) => f.id === c.id))
+                      .map((c) => c.id);
+                    onRepasoCorrectAnswers(correctIds);
+                  }
+                  setActiveCards(failed);
+                  setFlipped({});
+                  setVotes({});
+                }}
+                className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5"
               >
-                <span>Repasar errores ({wrongCount})</span>
+                <span>Repetir Repaso ({wrongCount} restantes)</span>
               </button>
+            ) : isRepasoMode ? (
+              <button
+                onClick={() => {
+                  if (onRepasoCorrectAnswers) {
+                    onRepasoCorrectAnswers(activeCards.map(c => c.id));
+                  }
+                  onFinishCourse();
+                }}
+                className="bg-[var(--green)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer"
+              >
+                <span>¡Listo! Repaso Completado 🎉</span>
+              </button>
+            ) : (
+              <>
+                {wrongCount > 0 && (
+                  <button
+                    onClick={triggerReviewRound}
+                    className="bg-[rgba(232,80,58,0.1)] text-[var(--red)] border border-transparent hover:border-[var(--red)] font-semibold text-sm py-3 px-6 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>Repasar errores ({wrongCount})</span>
+                  </button>
+                )}
+                {wrongCount > 0 && onCollectIncorrectCards && (
+                  <button
+                    onClick={() => onCollectIncorrectCards(getIncorrectCards())}
+                    className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-3 px-6 rounded-xl shadow-md hover:scale-105 transform transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>🔮 Repasar tarjetas ({wrongCount})</span>
+                  </button>
+                )}
+              </>
             )}
             <button
               onClick={onFinishCourse}
@@ -405,10 +476,54 @@ export function FlashcardPractice({
           {isWriteVerified && writeScore && (
             <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-[rgba(244,167,50,0.06)] border border-[rgba(244,167,50,0.15)] rounded-2xl shadow-sm">
               <div className="write-score text-[var(--accent)] font-display font-black text-base">
-                Resultados: {writeScore.correct} / {writeScore.total} aciertos (
-                {Math.round((writeScore.correct / writeScore.total) * 100)}%)
+                {isRepasoMode ? (
+                  <span>Repaso: {writeScore.correct} aciertos de {writeScore.total}</span>
+                ) : (
+                  <span>Resultados: {writeScore.correct} / {writeScore.total} aciertos ({Math.round((writeScore.correct / writeScore.total) * 100)}%)</span>
+                )}
               </div>
               <div className="flex gap-3 flex-wrap">
+                {isRepasoMode && getIncorrectCards().length > 0 ? (
+                  <button
+                    onClick={() => {
+                      const failed = getIncorrectCards();
+                      if (onRepasoCorrectAnswers) {
+                        const correctIds = activeCards
+                          .filter((c) => !failed.some((f) => f.id === c.id))
+                          .map((c) => c.id);
+                        onRepasoCorrectAnswers(correctIds);
+                      }
+                      setActiveCards(failed);
+                      setWrittenAnswers({});
+                      setIsWriteVerified(false);
+                      setWriteScore(null);
+                    }}
+                    className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-2.5 px-5 rounded-xl transition-all cursor-pointer hover:scale-105 transform shadow-md"
+                  >
+                    <span>Repetir Repaso ({getIncorrectCards().length} restantes)</span>
+                  </button>
+                ) : isRepasoMode ? (
+                  <button
+                    onClick={() => {
+                      if (onRepasoCorrectAnswers) {
+                        onRepasoCorrectAnswers(activeCards.map(c => c.id));
+                      }
+                      onFinishCourse();
+                    }}
+                    className="bg-[var(--green)] text-[#0f0e17] font-display font-black text-sm py-2.5 px-5 rounded-xl transition-all cursor-pointer hover:scale-105 transform shadow-md"
+                  >
+                    <span>¡Listo! Repaso Completado 🎉</span>
+                  </button>
+                ) : (
+                  getIncorrectCards().length > 0 && onCollectIncorrectCards && (
+                    <button
+                      onClick={() => onCollectIncorrectCards(getIncorrectCards())}
+                      className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] font-display font-black text-sm py-2.5 px-5 rounded-xl transition-all cursor-pointer hover:scale-105 transform shadow-md"
+                    >
+                      <span>🔮 Repasar tarjetas ({getIncorrectCards().length})</span>
+                    </button>
+                  )
+                )}
                 <button
                   onClick={onFinishCourse}
                   className="bg-transparent border border-[var(--border)] text-[var(--text)] hover:border-[var(--text)] text-sm font-bold py-2.5 px-5 rounded-xl transition-all cursor-pointer"
