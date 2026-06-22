@@ -1,5 +1,5 @@
 import { useState, useEffect, MouseEvent, ReactNode } from "react";
-import { ArrowLeft, Check, RotateCcw, AlertTriangle, Play, HelpCircle, Eye, Highlighter } from "lucide-react";
+import { ArrowLeft, Check, RotateCcw, AlertTriangle, Play, HelpCircle, Eye, Highlighter, RefreshCw } from "lucide-react";
 import { Card, CardMode } from "../types";
 import { EmojiIcon } from "./EmojiIcon";
 
@@ -61,6 +61,16 @@ export function FlashcardPractice({
       ...prev,
       [cardId]: !prev[cardId]
     }));
+  };
+
+  const toggleFlipAll = () => {
+    if (mode === "escribir") return;
+    const allFlipped = activeCards.length > 0 && activeCards.every((c) => flipped[c.id]);
+    const nextFlipped: Record<number, boolean> = {};
+    activeCards.forEach((c) => {
+      nextFlipped[c.id] = !allFlipped;
+    });
+    setFlipped(nextFlipped);
   };
 
   // Record memory status
@@ -325,37 +335,49 @@ export function FlashcardPractice({
         )}
       </div>
 
-      {/* Mode Control for Cards */}
-      <div className="card-mode-bar flex items-center gap-3 mb-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-1.5 w-fit">
-        <span className="card-mode-label text-xs uppercase font-bold text-[var(--text-muted)] px-2">
-          Modo:
-        </span>
-        <div className="card-mode-toggle flex gap-1">
-          <button
-            id="cmode-btn-ver"
-            onClick={() => setMode("ver")}
-            className={`card-mode-btn cursor-pointer text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all ${
-              mode === "ver"
-                ? "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] shadow-sm font-black"
-                : "text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <Eye className="w-3.5 h-3.5" />
-            <span>🔄 Ver / Flashear</span>
-          </button>
-          <button
-            id="cmode-btn-escribir"
-            onClick={() => setMode("escribir")}
-            className={`card-mode-btn cursor-pointer text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all ${
-              mode === "escribir"
-                ? "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] shadow-sm font-black"
-                : "text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <Highlighter className="w-3.5 h-3.5" />
-            <span>✏️ Escribir</span>
-          </button>
+      {/* Mode Control for Cards and Global Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 flex-wrap">
+        <div className="card-mode-bar flex items-center gap-3 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-1.5 w-fit">
+          <span className="card-mode-label text-xs uppercase font-bold text-[var(--text-muted)] px-2">
+            Modo:
+          </span>
+          <div className="card-mode-toggle flex gap-1">
+            <button
+              id="cmode-btn-ver"
+              onClick={() => setMode("ver")}
+              className={`card-mode-btn cursor-pointer text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all ${
+                mode === "ver"
+                  ? "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] shadow-sm font-black"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>🔄 Ver / Flashear</span>
+            </button>
+            <button
+              id="cmode-btn-escribir"
+              onClick={() => setMode("escribir")}
+              className={`card-mode-btn cursor-pointer text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all ${
+                mode === "escribir"
+                  ? "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-[#0f0e17] shadow-sm font-black"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <Highlighter className="w-3.5 h-3.5" />
+              <span>✏️ Escribir</span>
+            </button>
+          </div>
         </div>
+
+        {mode === "ver" && activeCards.length > 0 && (
+          <button
+            onClick={toggleFlipAll}
+            className="voltear-todas-btn cursor-pointer text-xs font-bold px-5 py-3 rounded-xl flex items-center gap-2 bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all shadow-sm"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>{activeCards.every((c) => flipped[c.id]) ? "Voltear todas (Español)" : "Voltear todas (Portugués)"}</span>
+          </button>
+        )}
       </div>
 
       {/* Primary Cards Panel */}
