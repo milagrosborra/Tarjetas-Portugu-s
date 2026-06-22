@@ -616,16 +616,42 @@ export const modulo3Categories: Category[] = [
     { id: 'sup_relativo', emoji: '🏆', name: 'Superlativo relativo', keys: ['o más grande', 'o más pequeño', 'o mejor', 'o peor'] }
   ]},
   { id: 'fazendo_malas', emoji: '🧳', name: 'Fazendo as Malas', subcats: [
-    { id: 'farmacia', emoji: '💊', name: 'Farmácia', keys: ['Curita', 'Bandita', 'Analgésico', 'Antiácido', 'Remedio para el mareo', 'Algodón', 'Gasa', 'Mertiolate'] },
-    { id: 'vestuario', emoji: '👕', name: 'Vestuário', keys: ['Abrigo', 'Buzo', 'Saco', 'Blazer', 'Remera', 'Camiseta', 'Suéter', 'Traje', 'Jean', 'Calza', 'Pijama', 'Bikini', 'Short', 'Zapato', 'Zapatillas'] },
-    { id: 'variedade', emoji: '🎒', name: 'Variedade', keys: ['Documentos personales', 'Lapicera', 'Agenda', 'Dinero', 'Cámara fotográfica', 'Pila', 'Libros'] },
-    { id: 'higiene', emoji: '🧴', name: 'Higiene e beleza', keys: ['Pasta de dientes', 'Cepillo de dientes', 'Colonia', 'Perfume', 'Desodorante', 'Shampoo', 'Acondicionador', 'Jabón', 'Toalla'] }
+    { id: 'farmacia', emoji: '💊', name: 'Farmácia', keys: [
+      'Bandaid', 'Analgésico', 'Antiácido', 'Remédio para enjoo', 'Algodão', 'Gaze', 'Mertiolate'
+    ] },
+    { id: 'vestuario', emoji: '👕', name: 'Vestuário', keys: [
+      'Agasalho', 'Paletó/jaqueta', 'Blusa moletom/camisa', 'Camiseta', 'Camisa polo', 'Suéter', 'Terno',
+      'Colete', 'Regata', 'Calça jean', 'Calça legging', 'Calça pescador', 'Calça moletom', 'Saia',
+      'Vestido', 'Camisola', 'Pijama', 'Calcinha/sutiã', 'Cueca', 'Meia', 'Maiô/biquíni',
+      'Calção de banho/sunga', 'Short/bermuda', 'Sandália', 'Chinelo', 'Sapato/bota', 'Tênis'
+    ] },
+    { id: 'variedade', emoji: '🎒', name: 'Variedade', keys: [
+      'Documentos pessoais', 'Papel para anotações', 'Caneta', 'Agenda', 'Dinheiro', 'Fósforos/vela',
+      'Agulha/linha de costura', 'Canivete', 'Máquina fotográfica', 'Pilha', 'Jogos de passatempo',
+      'Revistas/livros', 'Lista de amigos e familiares para trazer presentes e lembrancinhas'
+    ] },
+    { id: 'acessorios', emoji: '👓', name: 'Acessórios', keys: [
+      'Bolsa', 'Gorro', 'Boné', 'Chapéu', 'Relógio', 'Colar', 'Anel', 'Brincos', 'Pulseira', 'Cinto',
+      'Gravata', 'Óculos', 'Cachecol', 'Lenço', 'Luvas'
+    ] },
+    { id: 'higiene', emoji: '🧴', name: 'Higiene e beleza', keys: [
+      'Aparelho de barbear/depilar', 'Creme/loção de barbear', 'Absorvente higiênico', 'Bronzeador',
+      'Protetor solar', 'Creme hidratante', 'Creme dental', 'Escova de dentes', 'Fio dental',
+      'Colônia/perfume/desodorante', 'Cotonete', 'Escova/pente', 'Shampo/condicionador', 'Sabonete',
+      'Secador de cabelo', 'Toalha', 'Lenço de papel', 'Maquiagem'
+    ] },
+    { id: 'acampamento', emoji: '⛺', name: 'Acampamento', keys: [
+      'Barraca', 'Colchão/travesseiro', 'Cobertor', 'Mesa/cadeira', 'Copo/prato/panelas',
+      'Talheres (garfo/faca/colher)', 'Toalha de mesa/guardanapos', 'Saco de dormir'
+    ] }
   ]},
   { id: 'futuro_m3', emoji: '🔮', name: 'Futuro', type: 'verbos', verbs: ['Estudar', 'Entender', 'Dividir', 'Dizer', 'Fazer', 'Trazer'] },
   { id: 'subjuntivo_m3', emoji: '🤔', name: 'Presente do Subjuntivo', type: 'subjuntivo_verbos' },
   { id: 'no_hotel', emoji: '🏨', name: 'No Hotel', subcats: [
-    { id: 'hotel_personal', emoji: '👔', name: 'Personal y habitaciones', keys: ['Gerente', 'Recepcionista', 'Camareira', 'Porteiro', 'Reserva', 'Diária', 'Estadia', 'Suíte'] },
-    { id: 'hotel_amenidades', emoji: '🛏️', name: 'Camas, ropa y amenities', keys: ['Lençol', 'Cobertor', 'Travesseiro', 'Fronha', 'Piscina', 'Garagem'] }
+    { id: 'hotel_alojamento', emoji: '🏢', name: 'Tipos de alojamiento', keys: ['Cabana', 'Resort', 'Pousada', 'Albergue de estudantes/Hostel', 'Hotel Estância', 'Hotel de Alta Rotatividade/Motel', 'Hotel', 'Chalé', 'SPA', 'Estândar', 'Duplo', 'Simples'] },
+    { id: 'hotel_personal', emoji: '👔', name: 'Personal y habitaciones', keys: ['Gerente', 'Recepcionista', 'Telefonista', 'Camareira', 'Camareira/Arrumadeira', 'Porteiro', 'Ascensorista', 'Carregador', 'Manobrista', 'Mensageiro', 'Reserva', 'Diária', 'Estadia', 'Suíte'] },
+    { id: 'hotel_amenidades', emoji: '🛏️', name: 'Camas, ropa y amenities', keys: ['Lençol', 'Cobertor', 'Travesseiro', 'Fronha', 'Piscina', 'Garagem', 'Copa e cozinha', 'Cama de solteiro', 'Cama de casal', 'Cama extra', 'Berço', 'Ar-condicionado', 'Ar condicionado', 'Telefone', 'Cofre', 'Smart TV', 'Música ambiente', 'Aquecimento central', 'Frigobar', 'Área de lazer', 'Boate', 'Sauna', 'Sinuca', 'Baralho', 'Pingue-pongue', 'Cabide'] },
+    { id: 'hotel_servicos_regimes', emoji: '🛎️', name: 'Servicios, régimen y varios', keys: ['Serviço de quarto', 'Serviço de praia', 'Lavanderia/Passadeira', 'Serviço de despertador', 'Serviço de Babás', 'Serviço de traslado', 'Quartos de fundo/de frente', 'Quarto com vista para o mar', 'Pensão completa', 'Café da manhã'] }
   ]},
   { id: 'locais_refeicoes', emoji: '🍽️', name: 'Locais de Refeições', subcats: [
     { id: 'tipos_local', emoji: '🏪', name: 'Tipos de locales', keys: ['Rodízio', 'Churrascaria', 'Pizzaria', 'Lanchonete', 'Café', 'Padaria', 'Comida a quilo'] },
@@ -681,38 +707,20 @@ export const modulo3Categories: Category[] = [
       'A baixela', 'A louça', 'Os talheres', 'O garfo', 'A faca', 'A colher', 'O copo', 'A taça', 'O cálice', 'A xícara', 'O bule', 'O açucareiro', 'A toalha de mesa', 'O guardanapo', 'Os pratos', 'Prato fundo', 'Prato raso', 'Prato de sobremesa', 'A travessa'
     ] }
   ]},
-  { id: 'foto4_almoco_jantar', emoji: '🍲', name: 'Vocabulário: Almoço / Jantar', subcats: [
-    { id: 'f4_bebidas', emoji: '🥤', name: 'Bebidas', keys: [
-      'Vinho tinto ou blanco', 'Água com gás', 'Cerveja', 'Suco', 'Água mineral', 'Cachaça', 'Caipirinha', 'Champanha', 'Refrigerante', 'Guaraná', 'Coca', 'Soda', 'Laranja', 'Uva', 'Sprite'
+  { id: 'foto4_almoco_jantar', emoji: '🍲', name: 'Vocabulário: Almoço e Jantar', subcats: [
+    { id: 'f4_bebidas_entradas', emoji: '🍷', name: 'Bebidas e Entradas', keys: [
+      'Vinho tinto ou branco', 'Água com gás', 'Cerveja', 'Suco', 'Água mineral', 'Cachaça', 'Caipirinha', 'Champanha', 'Refrigerante', 'Guaraná', 'Coca', 'Soda', 'Laranja', 'Uva', 'Sprite', 'Tira-gosto', 'Torta (salgada ou doce)'
     ] },
-    { id: 'f4_entradas_acomp', emoji: '🥗', name: 'Entradas e acompanhamentos', keys: [
-      'Tira-gosto', 'Torta (salgada ou doce)'
-    ] },
-    { id: 'f4_saladas_verd', emoji: '🥦', name: 'Saladas e verduras', keys: [
+    { id: 'f4_verduras_legumes', emoji: '🥗', name: 'Verduras e Legumes', keys: [
       'Alface', 'Tomate', 'Cenoura', 'Cebola', 'Milho', 'Beterraba', 'Palmito', 'Repolho', 'Rúcula', 'Escarola', 'Agrião', 'Couve-flor', 'Brócolis', 'Alcachofra', 'Abóbora', 'Abobrinha', 'Berinjela', 'Pimentão', 'Batata', 'Batata-doce', 'Inhame', 'Lentilha', 'Ervilha', 'Grão-de-bico', 'Alho-poró', 'Espinafre', 'Chicória', 'Nabo', 'Rabanete', 'Acelga', 'Salsinha'
     ] },
-    { id: 'f4_prato_acomp', emoji: '🍚', name: 'Pratos e acompanhamentos', keys: [
-      'Arroz com feijão', 'Batata frita'
-    ] },
-    { id: 'f4_carnes_princ', emoji: '🥩', name: 'Carnes e pratos principaux', keys: [
-      'Carne', 'Assada', 'Churrasco', 'Filé', 'Bife', 'Porco', 'Peixe', 'Peixe frito', 'Peixe à milanesa', 'Peixe ensopado', 'Frango', 'Frango grelhado', 'Frango ao forno', 'Frango ensopado', 'Frango empanado', 'Frango à milanesa', 'Frango cozido'
-    ] },
-    { id: 'f4_massas', emoji: '🍝', name: 'Massas', keys: [
-      'Macarrão', 'Nhoque', 'Ravioli', 'Lasanha', 'Pizza', 'Panqueca'
-    ] },
-    { id: 'f4_outros', emoji: '🍳', name: 'Outros pratos', keys: [
-      'Fritada'
-    ] },
-    { id: 'f4_sobremesas', emoji: '🍰', name: 'Sobremesas', keys: [
-      'Sorvetes', 'Bolos', 'Docinhos'
+    { id: 'f4_prato_principal_sobremesa', emoji: '🥩', name: 'Prato Principal e Sobremesa', keys: [
+      'Arroz com feijão', 'Batata frita', 'Carne', 'Assada', 'Churrasco', 'Filé', 'Bife', 'Porco', 'Peixe', 'Peixe frito', 'Peixe à milanesa', 'Peixe ensopado', 'Frango', 'Frango grelhado', 'Frango ao forno', 'Frango ensopado', 'Frango empanado', 'Frango à milanesa', 'Frango cozido', 'Macarrão', 'Nhoque', 'Ravioli', 'Lasanha', 'Pizza', 'Panqueca', 'Fritada', 'Sorvetes', 'Bolos', 'Docinhos'
     ] }
   ]},
-  { id: 'foto5_cafe_lanche', emoji: '🥐', name: 'Café da manhã / Merenda / Lanche', subcats: [
-    { id: 'f5_bebidas', emoji: '☕', name: 'Bebidas', keys: [
-      'Café', 'Café com leite', 'Chá', 'Chá com leite', 'Chimarrão', 'Iogurte', 'Vitamina', 'Suco', 'Achocolatado'
-    ] },
-    { id: 'f5_paes_lanches', emoji: '🍞', name: 'Pães e lanches', keys: [
-      'Torradas', 'Pão', 'Manteiga', 'Geleia', 'Sanduíche de queijo e presunto', 'Bolo', 'Biscoito e bolachas', 'Croassã', 'Pão doce', 'Ovos e bacon', 'Sucrilhos'
+  { id: 'foto5_cafe_lanche', emoji: '☕', name: 'Vocabulário: Café da Manhã e Lanche', subcats: [
+    { id: 'f5_cafe_lanche', emoji: '🍞', name: 'Café e Lanche', keys: [
+      'Café', 'Café com leite', 'Chá', 'Chá com leite', 'Chimarrão', 'Iogurte', 'Vitamina', 'Suco', 'Achocolatado', 'Torradas', 'Pão', 'Manteiga', 'Geleia', 'Sanduíche de queijo e presunto', 'Bolo', 'Biscoito e bolachas', 'Croassã', 'Pão doce', 'Ovos e bacon', 'Sucrilhos'
     ] },
     { id: 'f5_frutas', emoji: '🍓', name: 'Frutas', keys: [
       'Melancia', 'Melão', 'Laranja', 'Banana', 'Manga', 'Mamão', 'Uva', 'Maçã', 'Morango', 'Abacaxi', 'Abacate', 'Ameixa', 'Açaí', 'Amora', 'Cajá', 'Caju', 'Carambola', 'Cereja', 'Figo', 'Goiaba', 'Graviola', 'Groselha', 'Jabuticaba', 'Jaca', 'Kiwi', 'Marmelo', 'Mexerica', 'Framboesa', 'Mirtilo', 'Acerola', 'Maracujá', 'Pêra', 'Pitanga', 'Pomelo'
@@ -722,6 +730,18 @@ export const modulo3Categories: Category[] = [
     { id: 'conj_lista', emoji: '📝', name: 'Frases de ligação', keys: [
       'Para que', 'Embora', 'Desde que', 'Caso que', 'Mesmo que'
     ] }
+  ]},
+  { id: 'clima_m3', emoji: '🌦️', name: 'Clima', subcats: [
+    { id: 'clima_exp_dia', emoji: '🌡️', name: 'O dia está / Faz...', keys: [
+      'Chuva', 'Calor', 'Neve', 'Faz sol', 'Faz frio', 'Faz calor',
+      'Nublado', 'Chuvoso', 'Ensolarado', 'Quente'
+    ] },
+    { id: 'clima_fenomenos', emoji: '⚡', name: 'Fenômenos Meteorológicos', keys: [
+      'Maresia', 'Neblina', 'Cerração', 'Nevoeiro', 'Granizo', 'Chuvisco',
+      'Garoa', 'Aguaceiro', 'Pancadas', 'Chuvarada', 'Brisa', 'Ventania',
+      'Tornado', 'Ciclone', 'Vendaval', 'Pé de vento', 'Furacão',
+      'Relâmpago', 'Raio', 'Trovão'
+    ] }
   ]}
 ];
 
@@ -729,7 +749,7 @@ export const modulo3FlashcardData: Record<string, { es: string; pt: string; emoj
   superlativos: [
     { es: 'Fácil', pt: 'Facílimo', emoji: '😌' },
     { es: 'Difícil', pt: 'Dificílimo', emoji: '😰' },
-    { es: 'Feliz', pt: 'Felicíssimo', emoji: '&#x1F604;' },
+    { es: 'Feliz', pt: 'Felicíssimo', emoji: '😊' },
     { es: 'Lindo', pt: 'Lindíssimo', emoji: '😍' },
     { es: 'Simpático', pt: 'Simpaticíssimo', emoji: '😊' },
     { es: 'Veloz', pt: 'Velocíssimo', emoji: '⚡' },
@@ -752,47 +772,116 @@ export const modulo3FlashcardData: Record<string, { es: string; pt: string; emoj
     { es: 'o peor', pt: 'o pior', emoji: '💔' }
   ],
   fazendo_malas: [
-    { es: 'Curita', pt: 'Bandaid', emoji: '🩹' },
-    { es: 'Bandita', pt: 'Bandaid', emoji: '🩹' },
+    // 1. Farmácia
+    { es: 'Curita / Bandita', pt: 'Bandaid', emoji: '🩹' },
     { es: 'Analgésico', pt: 'Analgésico', emoji: '💊' },
     { es: 'Antiácido', pt: 'Antiácido', emoji: '🧪' },
     { es: 'Remedio para el mareo', pt: 'Remédio para enjoo', emoji: '🤢' },
     { es: 'Algodón', pt: 'Algodão', emoji: '☁️' },
     { es: 'Gasa', pt: 'Gaze', emoji: '🩹' },
     { es: 'Mertiolate', pt: 'Mertiolate', emoji: '🔴' },
-    { es: 'Abrigo', pt: 'Agasalho', emoji: '🧥' },
-    { es: 'Buzo', pt: 'Agasalho', emoji: '🧥' },
-    { es: 'Saco', pt: 'Paletó', emoji: '👔' },
-    { es: 'Blazer', pt: 'Jaqueta', emoji: '👔' },
-    { es: 'Remera', pt: 'Camisa', emoji: '👕' },
-    { es: 'Camiseta', pt: 'Camiseta', emoji: '👕' },
+
+    // 2. Vestuário
+    { es: 'Abrigo / Buzo', pt: 'Agasalho', emoji: '🧥' },
+    { es: 'Saco / Campera', pt: 'Paletó/jaqueta', emoji: '🧥' },
+    { es: 'Buzo de frisa / Camisa', pt: 'Blusa moletom/camisa', emoji: '👕' },
+    { es: 'Camiseta / Remera', pt: 'Camiseta', emoji: '👕' },
+    { es: 'Camisa polo / Chomba', pt: 'Camisa polo', emoji: '👕' },
     { es: 'Suéter', pt: 'Suéter', emoji: '🧶' },
-    { es: 'Traje', pt: 'Terno', emoji: '🤵' },
-    { es: 'Jean', pt: 'Calça jean', emoji: '👖' },
-    { es: 'Calza', pt: 'Calça legging', emoji: '🩱' },
+    { es: 'Traje / Terno', pt: 'Terno', emoji: '🤵' },
+    { es: 'Chaleco', pt: 'Colete', emoji: '🎽' },
+    { es: 'Musculosa / Camiseta sin mangas', pt: 'Regata', emoji: '🎽' },
+    { es: 'Pantalón de jean / Vaqueros', pt: 'Calça jean', emoji: '👖' },
+    { es: 'Calza / Legging', pt: 'Calça legging', emoji: '🩱' },
+    { es: 'Pantalón pescador', pt: 'Calça pescador', emoji: '👖' },
+    { es: 'Pantalón de jogging', pt: 'Calça moletom', emoji: '👖' },
+    { es: 'Pollera / Falda', pt: 'Saia', emoji: '👗' },
+    { es: 'Vestido', pt: 'Vestido', emoji: '👗' },
+    { es: 'Camisón', pt: 'Camisola', emoji: '👗' },
     { es: 'Pijama', pt: 'Pijama', emoji: '🌙' },
-    { es: 'Bikini', pt: 'Biquíni', emoji: '🩱' },
-    { es: 'Short', pt: 'Short', emoji: '🩳' },
-    { es: 'Zapato', pt: 'Sapato', emoji: '👠' },
+    { es: 'Bombacha / Corpiño (ropa interior femenina)', pt: 'Calcinha/sutiã', emoji: '👙' },
+    { es: 'Calzoncillo / Ropa interior masculina', pt: 'Cueca', emoji: '🩲' },
+    { es: 'Medias', pt: 'Meia', emoji: '🧦' },
+    { es: 'Malla entera / Bikini', pt: 'Maiô/biquíni', emoji: '👙' },
+    { es: 'Malla de hombre / Sunga', pt: 'Calção de banho/sunga', emoji: '🩳' },
+    { es: 'Short / Bermuda', pt: 'Short/bermuda', emoji: '🩳' },
+    { es: 'Sandalia', pt: 'Sandália', emoji: '𑡼' },
+    { es: 'Ojota / Chancla', pt: 'Chinelo', emoji: '🩴' },
+    { es: 'Zapato / Bota', pt: 'Sapato/bota', emoji: '👢' },
     { es: 'Zapatillas', pt: 'Tênis', emoji: '👟' },
+
+    // 3. Variedade
     { es: 'Documentos personales', pt: 'Documentos pessoais', emoji: '🪪' },
-    { es: 'Lapicera', pt: 'Caneta', emoji: '🖊️' },
+    { es: 'Papel para anotaciones / notes', pt: 'Papel para anotações', emoji: '📝' },
+    { es: 'Lapicera / Bolígrafo', pt: 'Caneta', emoji: '🖊️' },
     { es: 'Agenda', pt: 'Agenda', emoji: '📅' },
-    { es: 'Dinero', pt: 'Dinheiro', emoji: '💵' },
-    { es: 'Cámara fotográfica', pt: 'Máquina fotográfica', emoji: '📷' },
-    { es: 'Pila', pt: 'Pilha', emoji: '🔋' },
-    { es: 'Libros', pt: 'Livros', emoji: '📚' },
-    { es: 'Pasta de dientes', pt: 'Creme dental', emoji: '🦷' },
+    { es: 'Dinero / Plata', pt: 'Dinheiro', emoji: '💵' },
+    { es: 'Fósforos / Vela', pt: 'Fósforos/vela', emoji: '🕯️' },
+    { es: 'Aguja / Hilo de costura', pt: 'Agulha/linha de costura', emoji: '🪡' },
+    { es: 'Navaja / Cortaplumas', pt: 'Canivete', emoji: '🔪' },
+    { es: 'Cámara fotográfica / de fotos', pt: 'Máquina fotográfica', emoji: '📷' },
+    { es: 'Pila / Batería', pt: 'Pilha', emoji: '🔋' },
+    { es: 'Juegos de pasatiempo / Entretenimiento', pt: 'Jogos de passatempo', emoji: '🧩' },
+    { es: 'Revistas / Libros', pt: 'Revistas/livros', emoji: '📚' },
+    { es: 'Lista de amigos y familiares para traer regalos y recuerdos', pt: 'Lista de amigos e familiares para trazer presentes e lembrancinhas', emoji: '📝' },
+
+    // 4. Acessórios
+    { es: 'Bolsa / Cartera', pt: 'Bolsa', emoji: '👜' },
+    { es: 'Gorro / Gorro de lana', pt: 'Gorro', emoji: '🧢' },
+    { es: 'Gorra con visera', pt: 'Boné', emoji: '🧢' },
+    { es: 'Sombrero', pt: 'Chapéu', emoji: '👒' },
+    { es: 'Reloj', pt: 'Relógio', emoji: '⌚' },
+    { es: 'Collar', pt: 'Colar', emoji: '📿' },
+    { es: 'Anillo', pt: 'Anel', emoji: '💍' },
+    { es: 'Aros / Pendientes', pt: 'Brincos', emoji: '💎' },
+    { es: 'Pulsera', pt: 'Pulseira', emoji: '📿' },
+    { es: 'Cinturón / Cinto', pt: 'Cinto', emoji: '🎗️' },
+    { es: 'Corbata', pt: 'Gravata', emoji: '👔' },
+    { es: 'Anteojos / Lentes', pt: 'Óculos', emoji: '👓' },
+    { es: 'Bufanda', pt: 'Cachecol', emoji: '🧣' },
+    { es: 'Pañuelo', pt: 'Lenço', emoji: '🧣' },
+    { es: 'Guantes', pt: 'Luvas', emoji: '🧤' },
+
+    // 5. Higiene e beleza
+    { es: 'Afeitadora / Depiladora', pt: 'Aparelho de barbear/depilar', emoji: '🪒' },
+    { es: 'Crema / Loción de afeitar', pt: 'Creme/loção de barbear', emoji: '🧴' },
+    { es: 'Toallitas higiénicas', pt: 'Absorvente higiênico', emoji: '🩸' },
+    { es: 'Bronceador', pt: 'Bronzeador', emoji: '☀️' },
+    { es: 'Protector solar', pt: 'Protetor solar', emoji: '☀️' },
+    { es: 'Crema hidratante', pt: 'Creme hidratante', emoji: '🧴' },
+    { es: 'Crema dental / Pasta de dientes', pt: 'Creme dental', emoji: '🦷' },
     { es: 'Cepillo de dientes', pt: 'Escova de dentes', emoji: '🪥' },
-    { es: 'Colonia', pt: 'Colônia', emoji: '🌸' },
-    { es: 'Perfume', pt: 'Perfume', emoji: '🌹' },
-    { es: 'Desodorante', pt: 'Desodorante', emoji: '💨' },
-    { es: 'Shampoo', pt: 'Shampoo', emoji: 'Shower' },
-    { es: 'Acondicionador', pt: 'Condicionador', emoji: 'Shower' },
+    { es: 'Hilo dental', pt: 'Fio dental', emoji: '🧵' },
+    { es: 'Colonia / Perfume / Desodorante', pt: 'Colônia/perfume/desodorante', emoji: '🧴' },
+    { es: 'Hisopos / Cotonetes', pt: 'Cotonete', emoji: '👂' },
+    { es: 'Cepillo / Peine', pt: 'Escova/pente', emoji: '🪮' },
+    { es: 'Shampoo / Acondicionador', pt: 'Shampo/condicionador', emoji: '🧼' },
     { es: 'Jabón', pt: 'Sabonete', emoji: '🧼' },
-    { es: 'Toalla', pt: 'Toalha', emoji: '🏊' }
+    { es: 'Secador de pelo', pt: 'Secador de cabelo', emoji: '💨' },
+    { es: 'Toalla', pt: 'Toalha', emoji: '🛁' },
+    { es: 'Pañuelos de papel / Tisú', pt: 'Lenço de papel', emoji: '🧻' },
+    { es: 'Maquillaje', pt: 'Maquiagem', emoji: '💄' },
+
+    // 6. Acampamento
+    { es: 'Carpa / Tienda de campaña', pt: 'Barraca', emoji: '⛺' },
+    { es: 'Colchón / Almohada / Almohadón', pt: 'Colchão/travesseiro', emoji: '🛏️' },
+    { es: 'Frazada / Manta', pt: 'Cobertor', emoji: '🛌' },
+    { es: 'Mesa / Silla / Reposera', pt: 'Mesa/cadeira', emoji: '🪑' },
+    { es: 'Vaso / Plato / Ollas / Vajilla', pt: 'Copo/prato/panelas', emoji: '🍽️' },
+    { es: 'Cubiertos (tenedor/cuchillo/cuchara)', pt: 'Talheres (garfo/faca/colher)', emoji: '🍴' },
+    { es: 'Mantel / Servilletas de mesa', pt: 'Toalha de mesa/guardanapos', emoji: '🍽️' },
+    { es: 'Saco de dormir / Bolsa de dormir', pt: 'Saco de dormir', emoji: '🛌' }
   ],
   no_hotel: [
+    { es: 'Cabaña', pt: 'Cabana', emoji: '🏡' },
+    { es: 'Resort', pt: 'Resort', emoji: '🏖️' },
+    { es: 'Posada', pt: 'Pousada', emoji: '🏡' },
+    { es: 'Albergue de estudiantes / Hostel', pt: 'Albergue de estudantes/Hostel', emoji: '🎒' },
+    { es: 'Hotel de campo / Estancia', pt: 'Hotel Estância', emoji: '🌾' },
+    { es: 'Hotel de alta rotatividad / Albergue transitorio / Motel', pt: 'Hotel de Alta Rotatividade/Motel', emoji: '🏩' },
+    { es: 'Hotel', pt: 'Hotel', emoji: '🏨' },
+    { es: 'Chalet', pt: 'Chalé', emoji: '🏡' },
+    { es: 'Spa', pt: 'SPA', emoji: '💆' },
     { es: 'Gerente', pt: 'Gerente', emoji: '💼' },
     { es: 'Recepcionista', pt: 'Recepcionista', emoji: '🛎️' },
     { es: 'Camareira', pt: 'Camareira', emoji: '🧹' },
@@ -806,7 +895,45 @@ export const modulo3FlashcardData: Record<string, { es: string; pt: string; emoj
     { es: 'Almohada', pt: 'Travesseiro', emoji: '😴' },
     { es: 'Funda de almohada', pt: 'Fronha', emoji: '🌙' },
     { es: 'Pileta', pt: 'Piscina', emoji: '🏊' },
-    { es: 'Garaje', pt: 'Garagem', emoji: '🚗' }
+    { es: 'Garaje', pt: 'Garagem', emoji: '🚗' },
+    { es: 'Telefonista', pt: 'Telefonista', emoji: '📞' },
+    { es: 'Camarera / Mucama', pt: 'Camareira/Arrumadeira', emoji: '🧹' },
+    { es: 'Ascensorista', pt: 'Ascensorista', emoji: '🛗' },
+    { es: 'Botones / Maletero', pt: 'Carregador', emoji: '🧳' },
+    { es: 'Aparcacoches / Valet parking', pt: 'Manobrista', emoji: '🚗' },
+    { es: 'Botones / Mensajero', pt: 'Mensageiro', emoji: '🛎️' },
+    { es: 'Estándar', pt: 'Estândar', emoji: '🛌' },
+    { es: 'Doble', pt: 'Duplo', emoji: '👥' },
+    { es: 'Simple', pt: 'Simples', emoji: '👤' },
+    { es: 'Mini cocina / Kitchenette', pt: 'Copa e cozinha', emoji: '🍳' },
+    { es: 'Cama individual / Cama de una plaza', pt: 'Cama de solteiro', emoji: '🛏️' },
+    { es: 'Cama matrimonial / Cama doble', pt: 'Cama de casal', emoji: '🛌' },
+    { es: 'Cama extra / Cama adicional', pt: 'Cama extra', emoji: '➕' },
+    { es: 'Cuna', pt: 'Berço', emoji: '👶' },
+    { es: 'Percha', pt: 'Cabide', emoji: '🧥' },
+    { es: 'Aire acondicionado', pt: 'Ar condicionado', emoji: '❄️' },
+    { es: 'Teléfono', pt: 'Telefone', emoji: '☎️' },
+    { es: 'Cofre / Caja fuerte', pt: 'Cofre', emoji: '🔒' },
+    { es: 'Smart TV / Televisor inteligente', pt: 'Smart TV', emoji: '📺' },
+    { es: 'Música funcional / Música ambiental', pt: 'Música ambiente', emoji: '🎵' },
+    { es: 'Calefacción central', pt: 'Aquecimento central', emoji: '🔥' },
+    { es: 'Minibar', pt: 'Frigobar', emoji: '🥤' },
+    { es: 'Área de recreación / Área de ocio', pt: 'Área de lazer', emoji: '⛹️' },
+    { es: 'Discoteca / Club nocturno', pt: 'Boate', emoji: '🪩' },
+    { es: 'Sauna', pt: 'Sauna', emoji: '🧖' },
+    { es: 'Billar / Pool', pt: 'Sinuca', emoji: '🎱' },
+    { es: 'Naipes / Mazo de cartas', pt: 'Baralho', emoji: '🃏' },
+    { es: 'Ping-pong / Tenis de mesa', pt: 'Pingue-pongue', emoji: '🏓' },
+    { es: 'Servicio de habitación / Servicio de cuarto', pt: 'Serviço de quarto', emoji: '🛎️' },
+    { es: 'Servicio de playa', pt: 'Serviço de praia', emoji: '🏖️' },
+    { es: 'Lavandería / Planchado', pt: 'Lavanderia/Passadeira', emoji: '🧺' },
+    { es: 'Servicio de despertador', pt: 'Serviço de despertador', emoji: '⏰' },
+    { es: 'Servicio de niñera / Babysitter', pt: 'Serviço de Babás', emoji: '👶' },
+    { es: 'Servicio de traslado / Traslado', pt: 'Serviço de traslado', emoji: '🚐' },
+    { es: 'Habitaciones del fondo / del frente', pt: 'Quartos de fundo/de frente', emoji: '🏢' },
+    { es: 'Habitación con vista al mar', pt: 'Quarto com vista para o mar', emoji: '🌊' },
+    { es: 'Pensión completa', pt: 'Pensão completa', emoji: '🍽️' },
+    { es: 'Desayuno', pt: 'Café da manhã', emoji: '☕' }
   ],
   locais_refeicoes: [
     { es: 'Tenedor libre', pt: 'Rodízio', emoji: '🍖' },
@@ -1045,6 +1172,38 @@ export const modulo3FlashcardData: Record<string, { es: string; pt: string; emoj
     { es: 'Siempre que / Desde que', pt: 'Desde que', emoji: '⏳' },
     { es: 'En caso de que', pt: 'Caso que', emoji: '💡' },
     { es: 'Incluso si / Aunque', pt: 'Mesmo que', emoji: '💪' }
+  ],
+  clima_m3: [
+    { es: 'Lluvia', pt: 'Chuva', emoji: '🌧️' },
+    { es: 'Calor', pt: 'Calor', emoji: '🔥' },
+    { es: 'Nieve', pt: 'Neve', emoji: '❄️' },
+    { es: 'Hace sol', pt: 'Faz sol', emoji: '☀️' },
+    { es: 'Hace frío', pt: 'Faz frio', emoji: '🥶' },
+    { es: 'Hace calor', pt: 'Faz calor', emoji: '🥵' },
+    { es: 'Nublado', pt: 'Nublado', emoji: '☁️' },
+    { es: 'Lluvioso', pt: 'Chuvoso', emoji: '🌧️' },
+    { es: 'Soleado', pt: 'Ensolarado', emoji: '☀️' },
+    { es: 'Cálido / Caliente', pt: 'Quente', emoji: '🥵' },
+    { es: 'Brisa marina / Olor a mar', pt: 'Maresia', emoji: '🌊' },
+    { es: 'Neblina', pt: 'Neblina', emoji: '🌫️' },
+    { es: 'Niebla muy espesa', pt: 'Cerração', emoji: '🌫️' },
+    { es: 'Niebla / Neblina', pt: 'Nevoeiro', emoji: '🌫️' },
+    { es: 'Granizo', pt: 'Granizo', emoji: '🌨️' },
+    { es: 'Llovizna / Chispeo', pt: 'Chuvisco', emoji: '🌦️' },
+    { es: 'Llovizna fina', pt: 'Garoa', emoji: '💧' },
+    { es: 'Aguacero', pt: 'Aguaceiro', emoji: '🌧️' },
+    { es: 'Chubascos / Ramalazo', pt: 'Pancadas', emoji: '🌦️' },
+    { es: 'Lluvia fuerte / Temporal', pt: 'Chuvarada', emoji: '⛈️' },
+    { es: 'Brisa', pt: 'Brisa', emoji: '🍃' },
+    { es: 'Viento fuerte / Ventolera', pt: 'Ventania', emoji: '💨' },
+    { es: 'Tornado', pt: 'Tornado', emoji: '🌪️' },
+    { es: 'Ciclón', pt: 'Ciclone', emoji: '🌀' },
+    { es: 'Vendaval', pt: 'Vendaval', emoji: '💨' },
+    { es: 'Ráfaga de viento repentina', pt: 'Pé de vento', emoji: '🌬️' },
+    { es: 'Huracán', pt: 'Furacão', emoji: '🌀' },
+    { es: 'Relámpago', pt: 'Relâmpago', emoji: '⚡' },
+    { es: 'Rayo', pt: 'Raio', emoji: '⚡' },
+    { es: 'Trueno', pt: 'Trovão', emoji: '⚡' }
   ]
 };
 
